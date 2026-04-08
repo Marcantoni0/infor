@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: white;
+  }
+  #btn {
+    background: none;
+    border: none;
+    font-size: 0.75rem;
+    color: #ccc;
+    cursor: pointer;
+    letter-spacing: 1px;
+  }
+  #btn:hover { color: #999; }
+  #btn.copied { color: #4caf50; }
+</style>
+</head>
+<body>
+<button id="btn" onclick="copyAll()">●</button>
+<script>
+const teoria = `DATABASE (Base di Dati): Insieme di dati strutturati, correlati e progettati in modo da risultare condivisibili da più utenti. Supera i limiti degli archivi tradizionali eliminando ridondanze e inconsistenze.
+
+INFORMAZIONE: Quantità di dati a cui abbiamo attribuito un significato. È un bene prezioso ma anche un costo: richiede risorse economiche, tempo e personale.
+
+SISTEMA INFORMATIVO AZIENDALE: Il sistema aziendale che si occupa di gestire le informazioni prodotte, acquisite e condivise dall'organizzazione.
+
+SISTEMA INFORMATICO: Il sistema che utilizza procedure automatizzate e strumenti tecnologici per processare i dati aziendali. Permette di produrre e gestire molti dati riducendo gli errori umani e dando risposte tempestive.
+
+FILE (Archivio): Insieme di archivi contenenti dati e informazioni memorizzati in maniera permanente su memorie di massa.
+
+RIDONDANZA DEI DATI: Gli archivi non sono collegati tra loro, quindi lo stesso dato viene memorizzato in più archivi → duplicazione, spreco di memoria e inefficienza.
+
+INCONSISTENZA DEI DATI: Lo stesso dato può essere memorizzato in più archivi con valori diversi, creando incertezza sulla versione corretta. Es: lo stesso cliente memorizzato con due indirizzi diversi in due archivi diversi.
+
+INTEGRITÀ DEI DATI: I database proteggono i dati da cambiamenti accidentali o voluti non corretti o non autorizzati. Es: non puoi cancellare un autore se esistono ancora sue opere nel database.
+
+DBMS (Database Management System): Software che gestisce il database, consentendo di velocizzare e rendere agevole ed efficiente l'accesso ai dati. Si occupa di: inserimento di nuovi dati, cancellazione di dati inutili, modifica di dati obsoleti, ricerca di dati. Esempi: Microsoft Access, MariaDB, MySQL, LibreOffice Base, PostgreSQL, Microsoft SQL Server.
+
+LE TRE FASI DI PROGETTAZIONE:
+1. PROGETTAZIONE CONCETTUALE: Rappresenta in maniera astratta le categorie dei dati e i legami tra loro. Produce lo Schema E-R.
+2. PROGETTAZIONE LOGICA: Decide come rappresentare e organizzare le categorie e quali vincoli devono rispettare.
+3. PROGETTAZIONE FISICA: Identifica come memorizzare i dati in memoria di massa per renderli accessibili agli utenti.
+
+MODELLO E-R: Ideato da Peter Chen nel 1976. E-R sta per Entity-Relationship. È il modello più diffuso nella Progettazione Concettuale. Identifica le Entità e le Associazioni tra di esse.
+
+SIMBOLI SCHEMA E-R:
+- RETTANGOLO = Entità
+- ELLISSI = Attributo
+- ELLISSI SOTTOLINEATA = Chiave Primaria
+- ROMBO = Associazione
+
+ENTITÀ: Classe composta da elementi con caratteristiche comuni (persone, oggetti, idee, eventi…). Rappresentata con un rettangolo con il nome dentro.
+
+ATTRIBUTI: Le caratteristiche/proprietà di un'entità. Rappresentati come ellissi collegate all'entità da una linea.
+- OBBLIGATORI: devono sempre avere un valore (es: data di nascita).
+- OPZIONALI: possono essere lasciati vuoti (es: numero di telefono di casa).
+
+ISTANZA DELL'ENTITÀ: L'insieme dei valori assunti da tutti gli attributi per un singolo elemento dell'entità. Es: (Luca, Belli, 26/11/2000, 34567437, Via Roma 234) è un'istanza dell'entità Studente.
+
+CHIAVE PRIMARIA: Attributo (o più attributi) che identifica in modo univoco e minimale ogni singola istanza di un'entità. Non possono esistere due istanze con la stessa chiave. Nello schema E-R si sottolinea. Se composta da più attributi, si sottolineano tutti.
+Requisiti: 1) il valore non deve cambiare nel tempo. 2) deve avere sempre un valore. 3) deve identificare univocamente ogni istanza.
+Soluzione pratica: CODICE auto-incrementale (numero assegnato automaticamente: 1, 2, 3…).
+
+ASSOCIAZIONE: Legame logico tra due o più entità. Identificata da un verbo, rappresentata con un rombo collegato alle entità tramite linee.
+
+TIPI DI ASSOCIAZIONE PER CARDINALITÀ:
+- UNO A UNO (1:1): un'istanza di E1 → una sola istanza di E2, e viceversa. Es: Studente scrive Tesi. Lettura: uno studente scrive una sola tesi e una tesi è scritta da un solo studente.
+- UNO A MOLTI (1:N): un'istanza di E1 → più istanze di E2, ma ogni istanza di E2 → solo una di E1. Es: Impiegato ha Figlio. Lettura: un impiegato ha più figli, ma ogni figlio è di un solo impiegato.
+- MOLTI A MOLTI (N:N): un'istanza di E1 → più istanze di E2 e viceversa. Es: Studente studia Materia. Lettura: uno studente studia più materie e una materia è studiata da più studenti.
+
+TIPI DI ASSOCIAZIONE PER STRUTTURA:
+- BINARIE: collegano due entità diverse.
+- UNARIE (o RICORSIVE): collegano un'istanza alla stessa entità. Es: Dipendente dirige Dipendente.
+- MULTIPLE: coinvolgono più di due entità. Es: Professore – Corso – Studente.
+
+PIÙ ASSOCIAZIONI TRA DUE ENTITÀ: Tra le stesse due entità possono esistere più associazioni diverse. Es: Studente residente Città (N:N) e Studente nato Città (N:1).
+
+CARDINALITÀ: Definisce il numero minimo e massimo di istanze con cui un'entità partecipa a un'associazione. Indicata con (min, max). Solitamente la cardinalità minima non viene rappresentata: si scrive solo 1 o N. Es: Giornalista —1— [scrive] —N— Articolo. Lettura: un giornalista scrive da 1 a più articoli; un articolo è scritto da un solo giornalista.
+
+ATTRIBUTI DELLE ASSOCIAZIONI: Anche le associazioni possono avere attributi propri (ellissi collegate al rombo). Si usano quando un dato dipende dalla coppia di entità e non da una sola. Es: l'associazione "studia" tra Studente e Materia ha attributi AnnoScolastico e VotoFinale, perché il voto dipende dalla coppia (Studente, Materia).`;
+
+function copyAll() {
+  navigator.clipboard.writeText(teoria).then(() => {
+    const btn = document.getElementById('btn');
+    btn.textContent = '✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '●';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
